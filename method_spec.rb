@@ -17,4 +17,15 @@ describe "RepoDepot::Method" do
     RepoDepot::Method.new('', events).deltas.should == [1, -1]
   end
 
+  it "should report its current complexity" do
+    events = [CodeEvent.new(complexity: 1.2),
+              CodeEvent.new(complexity: 2),
+              CodeEvent.new(complexity: 11.4)]
+    RepoDepot::Method.new('', events).complexity.should == 11.4
+  end
+
+  it "reports zero complexity when it has no events" do
+    RepoDepot::Method.new('', []).complexity.should == 0.0
+  end
+
 end

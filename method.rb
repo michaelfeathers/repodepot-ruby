@@ -15,5 +15,11 @@ module RepoDepot
         second.complexity - first.complexity
       end
     end
+
+    def complexity
+      return 0.0 if @events == []
+      @events.last.complexity
+    end
+
   end
 end
