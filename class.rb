@@ -13,8 +13,7 @@ module RepoDepot
     end
 
     def complexity
-      return 0.0 if declared_methods.empty?
-      declared_methods.map(&:complexity).reduce(:+)
+      complexity_of(@declared_methods)
     end
 
   end

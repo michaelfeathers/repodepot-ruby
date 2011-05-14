@@ -14,6 +14,11 @@ module RepoDepot
       events.group_by(&symbol).map { |args| class_object.new(*args) }
     end
 
+    def complexity_of collection
+      return 0.0 if collection.empty?
+      collection.map(&:complexity).reduce(:+)
+    end
+
   end
 
 end
