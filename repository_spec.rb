@@ -22,7 +22,19 @@ describe "RepoDepot::Repository" do
   it "should create a list of commits for events" do
     events = [CodeEvent.new(commit: '9e9273dcbbc7bcc882520f2a8ffe13e4f3b273ac'),
               CodeEvent.new(commit: 'e9c1c0adb4e92d4b2c4117dbc139821ccf2b2851')]
-
-
+    RepoDepot::Repository.new('', events).commits.count == 2
   end
+
+  it "should not populate files when not given events" do
+    repository = RepoDepot::Repository.new('', [])
+    repository.source_files.should be_empty
+  end
+
+  it "should add a file when there is an event for a file" do
+    event = CodeEvent.new(file_name: "A")
+    repository = RepoDepot::Repository.new('', [event])
+    repository.source_files.count.should == 1
+  end
+
+
 end
