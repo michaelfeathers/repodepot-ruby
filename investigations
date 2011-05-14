@@ -1,0 +1,12 @@
+
+- Do large commits (in terms of the delta of complexity) occur
+  with equal frequency across the day?
+- Is commit size correlated with weighted complexity?
+- Is commit size correlated with the time since last commit?
+- Are large deltas in a complex method's life line correlated
+  with large changes?
+- Can we identify extract method?
+
+
+For the Corey session: 'what happened here?
+

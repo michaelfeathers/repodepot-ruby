@@ -1,0 +1,19 @@
+
+
+- Have commits on Repository return a new Repository
+  which has only the CodeEvent for that commit
+- Have functions on repository which give a slice of commits
+  by sha or date
+- Add a declared_methods collection on Repository for all of
+  the methods in the repository.  Will be very easy if
+  CodeEvent gets  full_method_name method.  Then it is
+  just a group_by on the original events
+- Make sure that group_by preserves order.  If unable to,
+  embedded date sort checks across the code that can be
+  toggled.
+- Consider adding a changed_methods method which looks
+  at the current and last commit and gives the complexity
+  delta -- needed now as we have code events for methods
+  just because they are in a file.  May decide that
+  it is better to just handle this with external code.
+

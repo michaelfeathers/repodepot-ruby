@@ -15,8 +15,7 @@ module RepoDepot
     end
 
     def complexity_of collection
-      return 0.0 if collection.empty?
-      collection.map(&:complexity).reduce(:+)
+      collection.map(&:complexity).reduce(0.0, :+)
     end
 
   end
