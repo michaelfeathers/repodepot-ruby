@@ -13,5 +13,9 @@ module RepoDepot
       @source_files = build_collection(:file_name, SourceFile)
     end
 
+    def complexity
+      @classes.reduce(0) { |sum, c| sum += c.complexity }
+    end
+
   end
 end

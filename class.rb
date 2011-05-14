@@ -13,7 +13,7 @@ module RepoDepot
     end
 
     def complexity
-      events.reduce(0) { |sum, e| sum += e.complexity }
+      declared_methods.reduce(0) { |sum, m| sum += m.complexity }
     end
 
   end

@@ -8,8 +8,8 @@ describe "RepoDepot::Class" do
   end
 
   it "should sum the complexities of its code events" do
-    events = [CodeEvent.new(complexity: 1.0),
-              CodeEvent.new(complexity: 2.0)]
+    events = [CodeEvent.new(method_name: "a", complexity: 1.0),
+              CodeEvent.new(method_name: "b", complexity: 2.0)]
     RepoDepot::Class.new("A", events).complexity.should == 3.0
   end
 

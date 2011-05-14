@@ -36,5 +36,12 @@ describe "RepoDepot::Repository" do
     repository.source_files.count.should == 1
   end
 
+  it "can calculate its total complexity" do
+    events = [
+      CodeEvent.new(class_name: "A", method_name: "a", complexity: 0.2),
+      CodeEvent.new(class_name: "B", method_name: "a", complexity: 0.4)
+    ]
+    RepoDepot::Repository.new('', events).complexity.should be_within(0.1).of(0.6)
+  end
 
 end
