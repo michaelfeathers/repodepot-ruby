@@ -2,22 +2,23 @@
 require_relative 'class.rb'
 require_relative 'sourcefile.rb'
 
-# MF remove duplication in initialize
-
 module RepoDepot
   class Repository
     attr_reader :classes, :source_files
 
     def initialize name, events
       @events = events
-      @classes = events.group_by {|e| e.class_name }
-                       .map { |name, events| Class.new(name, events) }
-      @source_files = events.group_by {|e| e.file_name }
-                       .map { |name, events| SourceFile.new(name, events) }
+      @classes = build_collection(:class_name, Class)
+      @source_files = build_collection(:file_name, SourceFile)
     end
 
     def commits
       @commits ||= @events.map { |e| e.commit }
+    end
+
+  private
+    def build_collection symbol, class_object
+      @events.group_by(&symbol).map { |args| class_object.new(*args) }
     end
 
   end
