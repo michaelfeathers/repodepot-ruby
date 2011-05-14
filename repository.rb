@@ -14,7 +14,8 @@ module RepoDepot
     end
 
     def complexity
-      @classes.reduce(0) { |sum, c| sum += c.complexity }
+      return 0.0 if @classes.empty?
+      @classes.map(&:complexity).reduce(:+)
     end
 
   end
