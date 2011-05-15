@@ -5,16 +5,16 @@ require_relative 'sourcefile.rb'
 
 module RepoDepot
   class Repository < CodeHistory
-    attr_reader :classes, :source_files
 
-    def initialize name, events
-      super
-      @classes = build_collection(:class_name, Class)
-      @source_files = build_collection(:file_name, SourceFile)
+    def source_files; @source_files ||= collection_of(:file_name, SourceFile); end
+    def classes;      @classes      ||= collection_of(:class_name, Class); end
+
+    def methods
+      classes.map { |c| c.methods }.flatten
     end
 
     def complexity
-      complexity_of(@classes)
+      complexity_of(classes)
     end
 
   end

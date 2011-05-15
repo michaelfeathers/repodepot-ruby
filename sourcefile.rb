@@ -1,7 +1,5 @@
 
 module RepoDepot
-  class SourceFile
-    def initialize name, events
-    end
+  class SourceFile < CodeHistory
   end
 end

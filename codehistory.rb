@@ -2,15 +2,15 @@
 
 module RepoDepot
 
-  class CodeHistory < Struct.new(:name,:events)
+  class CodeHistory < Struct.new(:name, :events)
 
     def commits
-      @commits ||= events.map(&:commit)
+      @commits ||= events.map(&:commit).uniq
     end
 
     protected
 
-    def build_collection symbol, class_object
+    def collection_of symbol, class_object
       events.group_by(&symbol).map { |args| class_object.new(*args) }
     end
 

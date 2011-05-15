@@ -8,22 +8,11 @@ class CodeEvent
     end
   end
 
-  def file_name
-    return nil unless instance_variable_get(:@location)
-    location.split(/\//).select {|seg| seg.end_with?('.rb') }.first
-  end
-
-  def class_name
-    return nil unless instance_variable_get(:@location)
-    segs = location.split(/\//)
-    class_index = segs.find_index {|seg| seg.end_with?('.rb')}
-    return nil unless class_index
-    segs[class_index + 1]
-  end
-
-  def method_name
-    return nil unless instance_variable_get(:@location)
-    location.split(/\//).last
+  # Considering moving this to code that populates
+  # events so that this class isn't making assumptions
+  # about what it will be populated with
+  def full_method_name
+    class_name + "#" + method_name
   end
 
 private

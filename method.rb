@@ -1,24 +1,21 @@
 
 
 module RepoDepot
-  class Method
-    def initialize name, events
-      @events = events
-    end
+  class Method < CodeHistory
 
     def life_line
-      @events.map(&:complexity)
+      events.map(&:complexity)
     end
 
     def deltas
-      @events.each_cons(2).map do |first, second|
+      events.each_cons(2).map do |first, second|
         second.complexity - first.complexity
       end
     end
 
     def complexity
-      return 0.0 if @events == []
-      @events.last.complexity
+      return 0.0 if events.empty?
+      events.last.complexity
     end
 
   end

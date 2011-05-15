@@ -1,5 +1,7 @@
 
 
+- Add in csv read and normalization for non-string typed
+  fields
 - Have commits on Repository return a new Repository
   which has only the CodeEvent for that commit
 - Have functions on repository which give a slice of commits
@@ -16,4 +18,9 @@
   delta -- needed now as we have code events for methods
   just because they are in a file.  May decide that
   it is better to just handle this with external code.
+- Clean up CodeEvent
+- Right now, Method doesn't inherit from CodeHistory.
+  Any need to?
+- Create a Diff class with removed_methods, changed_methods, added_methods
+  working off of two histories
 

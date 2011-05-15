@@ -44,4 +44,14 @@ describe "RepoDepot::Repository" do
     RepoDepot::Repository.new('', events).complexity.should be_within(0.1).of(0.6)
   end
 
+  it "should return methods for all of its classes" do
+    events = [
+      CodeEvent.new(class_name: "A", method_name: "a"),
+      CodeEvent.new(class_name: "B", method_name: "a"),
+      CodeEvent.new(class_name: "B", method_name: "b")
+    ]
+    methods = RepoDepot::Repository.new('', events).methods
+    methods.map(&:name).should == ["a", "a", "b"]
+  end
+
 end
