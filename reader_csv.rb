@@ -1,7 +1,7 @@
 require 'csv'
 require 'time'
 require_relative 'code_event.rb'
-def self.read_events file_name
+def read_events file_name
   first_row = true
   names = []
   events = []
