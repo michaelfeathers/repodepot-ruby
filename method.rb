@@ -13,6 +13,10 @@ module RepoDepot
       end
     end
 
+    def full_name
+      events.first.full_method_name
+    end
+
     def complexity
       return 0.0 if events.empty?
       events.last.complexity
