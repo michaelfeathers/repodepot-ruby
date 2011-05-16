@@ -8,6 +8,10 @@ module RepoDepot
       @commits ||= events.map(&:commit).uniq
     end
 
+    def for_commit sha1
+      Repository.new(sha1, events.select{|e| e.commit =~ /^#{sha1}/})
+    end
+
     protected
 
     def collection_of symbol, class_object
@@ -17,7 +21,6 @@ module RepoDepot
     def complexity_of collection
       collection.map(&:complexity).reduce(0.0, :+)
     end
-
   end
 
 end
