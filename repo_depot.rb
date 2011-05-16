@@ -6,3 +6,5 @@ require_relative 'method.rb'
 require_relative 'reader_csv.rb'
 require_relative 'repository.rb'
 require_relative 'source_file.rb'
+require_relative 'writer_csv.rb'
+
