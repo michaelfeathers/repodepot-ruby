@@ -1,6 +1,6 @@
 
 require 'time'
-require_relative 'codeevent.rb'
+require_relative 'code_event.rb'
 
 class CSVEventStore
   def initialize csv_text

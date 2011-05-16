@@ -1,5 +1,5 @@
 
-require_relative 'codehistory.rb'
+require_relative 'code_history.rb'
 require_relative 'method.rb'
 
 # Calling the collection `methods'.  If the override of

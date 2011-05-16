@@ -1,7 +1,4 @@
-
-require_relative 'codehistory.rb'
-require_relative 'class.rb'
-require_relative 'sourcefile.rb'
+require_relative 'code_history.rb'
 
 module RepoDepot
   class Repository < CodeHistory
