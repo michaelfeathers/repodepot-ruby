@@ -1,3 +1,4 @@
+require 'repo_depot.rb'
 events = read_events 'ma_data_with_commits'
 
 app_events = events.select{|e| e.file_name =~ /^(app|lib\/mercury_app)/}; nil
