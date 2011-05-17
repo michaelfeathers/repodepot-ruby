@@ -1,0 +1,40 @@
+events = read_events 'ma_data_with_commits'
+
+app_events = events.select{|e| e.file_name =~ /^(app|lib\/mercury_app)/}; nil
+lib_events = events.select{|e| e.file_name =~ /^lib\/mercury_app/}; nil
+spec_events = events.select{|e| e.file_name =~ /(spec|spec_no_rails)/}; nil
+feature_events = events.select{|e| e.file_name =~ /^features/}; nil
+work_events = app_events + spec_events; nil
+
+app_repo = RepoDepot::Repository.new("app", app_events); nil
+lib_repo = RepoDepot::Repository.new("lib", lib_events); nil
+spec_repo = RepoDepot::Repository.new("spec", spec_events); nil
+feature_repo = RepoDepot::Repository.new("feature", feature_events); nil
+work_repo = RepoDepot::Repository.new("work", work_events); nil
+
+Frequency per time
+work_repo.events.map{|e| e.date.hour}.freq
+by_hour = (0..23).zip(_)
+by_hour.sort_by{|a| a[1]}.reverse
+
+work_repo.events.map{|e| e.date.min}.freq
+by_minute = (0..59).zip(_)
+by_minute.sort_by{|a| a[1]}.reverse
+
+Complexity
+app_repo.events.map(&:complexity).sort
+app_repo.events.map{|e| [e.complexity, e]}.select{|p| p[0] > 60}.map{|p| p[1].full_method_name}
+app_repo.events.map{|e| [e.complexity, e]}.select{|p| p[0] > 60}.last[1]
+
+Lifeline
+name = "FeelingsController#create" #"TrackingsController#show"
+app_repo.methods.select {|m| m.full_name == name}.first.life_line.reverse
+app_repo.methods.select {|m| m.full_name == name}.first.deltas.reverse
+
+
+File per commit
+app_freq = app_repo.events.group_by(&:commit).map { |sha, events| events.map(&:file_name).uniq.count }.freq
+work_freq = work_repo.events.group_by(&:commit).map { |sha, events| events.map(&:file_name).uniq.count }.freq
+(0..work_freq.count).zip(work_freq)
+(0..app_freq.count).zip(app_freq)
+
