@@ -1,5 +1,6 @@
 require_relative 'code_history.rb'
 require_relative 'source_file.rb'
+require_relative 'delta.rb'
 
 module RepoDepot
   class Repository < CodeHistory
@@ -9,6 +10,10 @@ module RepoDepot
 
     def methods
       classes.map { |c| c.methods }.flatten
+    end
+
+    def delta_for_commits sha_a, sha_b
+      Delta.new(events.select {|e| e.commit == sha_a }, events.select {|e| e.commit == sha_b })
     end
 
     def complexity
