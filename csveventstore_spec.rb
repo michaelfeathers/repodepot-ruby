@@ -1,6 +1,6 @@
 
 require 'rspec'
-require_relative 'csveventstore.rb'
+require_relative 'csv_event_store.rb'
 
 describe "CSVEventStore" do
   it "should read a complexity" do
