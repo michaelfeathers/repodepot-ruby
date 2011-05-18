@@ -1,6 +1,6 @@
 
 require 'rspec'
-require_relative 'codeevent.rb'
+require_relative 'code_event.rb'
 require_relative 'repository.rb'
 
 describe "RepoDepot::Repository" do
