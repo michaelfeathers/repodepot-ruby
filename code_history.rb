@@ -15,7 +15,7 @@ module RepoDepot
     end
 
     def commits
-      @commits ||= events.map(&:commit).uniq
+      @commits ||= events.map { |e| [e.commit, e.date]}.uniq
     end
 
     def for_commit sha1
