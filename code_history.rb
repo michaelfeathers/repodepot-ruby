@@ -22,6 +22,10 @@ module RepoDepot
       Repository.new(sha1, events.group_by(&:commit)[sha1])
     end
 
+    def state_at_commit sha1
+      events.group_by(&:commit)[sha1]
+    end
+
     protected
 
     def collection_of symbol, class_object
