@@ -9,11 +9,18 @@ describe "RepoDepot::Delta" do
       r.delta_for_commits('1a2', '3b4').removed_methods.count.should eq(0)
     end
 
-    it "reports one when a method disappears between commits" do
+    it "reports 1 when a method disappears between commits" do
       event = CodeEvent.new(commit: 'a', class_name: 'class_a', method_name: 'method_a')
       r = RepoDepot::Repository.new('', [event])
       r.delta_for_commits('a', 'b').removed_methods.count.should eq(1)
     end
 
+  end
+
+  context "#added_methods" do
+    it "reports zero when commits are empty" do
+      r = RepoDepot::Repository.new('', [])
+      r.delta_for_commits('1a2', '3b4').removed_methods.count.should eq(0)
+    end
   end
 end
