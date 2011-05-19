@@ -13,7 +13,8 @@ module RepoDepot
     end
 
     def delta_for_commits sha_a, sha_b
-      Delta.new(events.select {|e| e.commit == sha_a }, events.select {|e| e.commit == sha_b })
+      delta_events = events.select { |e| e.commit == sha_a || e.commit == sha_b }
+      Delta.new(delta_events, sha_a, sha_b)
     end
 
     def complexity

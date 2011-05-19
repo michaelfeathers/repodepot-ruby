@@ -10,7 +10,7 @@ describe "RepoDepot::Delta" do
     end
 
     it "reports one when a method disappears between commits" do
-      event = CodeEvent.new(commit: 'a', method_name: 'method_a')
+      event = CodeEvent.new(commit: 'a', class_name: 'class_a', method_name: 'method_a')
       r = RepoDepot::Repository.new('', [event])
       r.delta_for_commits('a', 'b').removed_methods.count.should eq(1)
     end
