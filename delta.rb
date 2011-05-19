@@ -9,18 +9,26 @@ module RepoDepot
     end
 
     def removed_methods
-      @repository.methods.select { |m| m.events.count == 1 }
-                         .select { |m| m.events.first.commit == @first_commit }
+      methods_with_only @first_commit
     end
 
     def added_methods
-      @repository.methods.select {|m| m.events.count == 1 }
-                         .select { |m| m.events.first.commit == @second_commit }
+      methods_with_only @second_commit
     end
 
     def changed_methods
-      @repository.methods.select { |m| m.events.count == 2 }
-                         .select { |m| m.events[0].complexity != m.events[1].complexity }
+      methods_with_both_commits.select { |m| m.events[0].complexity != m.events[1].complexity }
+    end
+
+    private
+
+    def methods_with_only commit
+       @repository.methods.select { |m| m.events.count == 1 }
+                          .select { |m| m.events.first.commit == commit }
+    end
+
+    def methods_with_both_commits
+       @repository.methods.select { |m| m.events.count == 2 }
     end
   end
 
