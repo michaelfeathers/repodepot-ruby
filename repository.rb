@@ -1,5 +1,6 @@
 require_relative 'code_history.rb'
 require_relative 'source_file.rb'
+require_relative 'class.rb'
 require_relative 'delta.rb'
 
 module RepoDepot

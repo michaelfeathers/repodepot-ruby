@@ -1,8 +1,18 @@
 
+require_relative 'utilities.rb'
 
 module RepoDepot
 
-  class CodeHistory < Struct.new(:name, :events)
+  class CodeHistory
+    include InstanceMethods
+
+    attr_reader :name, :events
+
+    def initialize name, events
+      assert_date_sorted events
+      @name = name
+      @events = events
+    end
 
     def commits
       @commits ||= events.map(&:commit).uniq

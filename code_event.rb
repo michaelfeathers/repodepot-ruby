@@ -38,7 +38,7 @@ private
       define_attribute(reader_for(sym))
       self.send(sym,*args)
     elsif args.count == 0
-      return 0
+      return nil
     else
       super
     end

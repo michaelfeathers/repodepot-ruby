@@ -20,8 +20,8 @@ describe "RepoDepot::Repository" do
   end
 
   it "should create a list of commits for events" do
-    events = [CodeEvent.new(commit: '9e9273dcbbc7bcc882520f2a8ffe13e4f3b273ac'),
-              CodeEvent.new(commit: 'e9c1c0adb4e92d4b2c4117dbc139821ccf2b2851')]
+    events = [CodeEvent.new(commit: '9e9273dcbbc7bcc882520f2a8ffe13e4f3b273ac', date: '1/1/2000'),
+              CodeEvent.new(commit: 'e9c1c0adb4e92d4b2c4117dbc139821ccf2b2851', date: '1/1/2001')]
     RepoDepot::Repository.new('', events).commits.count == 2
   end
 
@@ -46,9 +46,9 @@ describe "RepoDepot::Repository" do
 
   it "should return methods for all of its classes" do
     events = [
-      CodeEvent.new(class_name: "A", method_name: "a"),
-      CodeEvent.new(class_name: "B", method_name: "a"),
-      CodeEvent.new(class_name: "B", method_name: "b")
+      CodeEvent.new(class_name: "A", method_name: "a", date: '1/1/2000'),
+      CodeEvent.new(class_name: "B", method_name: "a", date: '1/1/2001'),
+      CodeEvent.new(class_name: "B", method_name: "b", date: '1/1/2002')
     ]
     methods = RepoDepot::Repository.new('', events).methods
     methods.map(&:name).should == ["a", "a", "b"]
