@@ -18,6 +18,10 @@ module RepoDepot
       @commits ||= events.map { |e| [e.commit, e.date]}.uniq
     end
 
+    def date_for_commit sha1
+      (@dates_for_commits ||= events.map { |e| { e.commit => e.date }})[sha1]
+    end
+
     def for_commit sha1
       Repository.new(sha1, events.group_by(&:commit)[sha1])
     end
