@@ -8,7 +8,7 @@ describe "RepoDepot::CodeHistory" do
     it "returns a new repository for a commit" do
       commit = 'a1b2c3'
       event = CodeEvent.new(commit: commit, method_name: 'bar')
-      repository = RepoDepot::CodeHistory.new('example', [event]).for_commit commit
+      repository = RepoDepot::CodeHistory.new('', [event]).for_commit commit
       repository.methods.count.should eq(1)
     end
   end
@@ -17,7 +17,7 @@ describe "RepoDepot::CodeHistory" do
     it "finds an event at a commit" do
       commit = 'a1b2c3'
       event = CodeEvent.new(commit: commit, method_name: 'bar')
-      repository = RepoDepot::CodeHistory.new('example', [event]).for_commit(commit)
+      repository = RepoDepot::CodeHistory.new('', [event]).for_commit(commit)
       repository.state_at_commit(commit).map {|e| e.method_name }.should == ["bar"]
     end
 
@@ -26,18 +26,17 @@ describe "RepoDepot::CodeHistory" do
       commit = 'a'
       events << CodeEvent.new(commit: commit, class_name: 'Foo', method_name: 'bar')
       events << CodeEvent.new(commit: commit, class_name: 'Foo', method_name: 'baz')
-      repository = RepoDepot::CodeHistory.new('example', events).for_commit(commit)
+      repository = RepoDepot::CodeHistory.new('', events).for_commit(commit)
       repository.state_at_commit(commit).map {|e| e.method_name }.should == ["bar", "baz"]
     end
 
-    # it "finds an event that is earlier than the commit if there is no event for the commit" do
+    #it "finds an event that is earlier than the commit if there is no event for the commit" do
     #  events = []
     #  events << CodeEvent.new(commit: 'a', class_name: 'Foo', method_name: 'bar', date: '1/1/2011')
     #  events << CodeEvent.new(commit: 'b', class_name: 'Foo', method_name: 'baz', date: '1/1/2012')
-    #  repository = RepoDepot::CodeHistory.new('example', events).for_commit('b')
+    #  repository = RepoDepot::CodeHistory.new('', events).for_commit('b')
     #  repository.state_at_commit('b').map {|e| e.method_name }.should == ["bar", "baz"]
-    # end
+    #end
   end
-
 
 end
