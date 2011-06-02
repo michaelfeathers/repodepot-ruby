@@ -8,4 +8,7 @@ require_relative 'repository.rb'
 require_relative 'source_file.rb'
 require_relative 'writer_csv.rb'
 require_relative 'array_ext.rb'
+require_relative 'commit.rb'
+require_relative 'weaver.rb'
+require_relative 'depot.rb'
 
