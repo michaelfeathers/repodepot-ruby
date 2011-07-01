@@ -10,6 +10,5 @@ def weave events
     link m.events, :next_state
     link m.events.reverse, :previous_state
   end
-  nil
 end
 
