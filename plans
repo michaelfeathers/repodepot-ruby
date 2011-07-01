@@ -13,4 +13,6 @@
 - Clean up CodeEvent
 - Create a Diff class with removed_methods, changed_methods, added_methods
   working off of two histories
+- for removed_methods need to, for each file in a commit see whether all
+  of the methods that were there in the previous commit of the file are stil there now
 

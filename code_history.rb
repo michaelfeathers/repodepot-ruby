@@ -1,21 +1,20 @@
 
-require_relative 'utilities.rb'
-
 module RepoDepot
 
   class CodeHistory
-    include InstanceMethods
-
     attr_reader :name, :events
 
     def initialize name, events
-      assert_date_sorted events
       @name = name
       @events = events
     end
 
     def commits
       @commits ||= events.map { |e| [e.commit, e.date]}.uniq
+    end
+
+    def commit sha1
+      Commit.new(sha1, state_at_commit(sha1))
     end
 
     def for_commit sha1
@@ -34,6 +33,10 @@ module RepoDepot
 
     def complexity_of collection
       collection.map(&:complexity).reduce(0.0, :+)
+    end
+
+    def to_s
+      @name
     end
   end
 

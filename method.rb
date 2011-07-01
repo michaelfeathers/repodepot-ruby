@@ -13,6 +13,12 @@ module RepoDepot
       end
     end
 
+    def date_deltas
+      events.each_cons(2).map do |first, second|
+        (second.date - first.date) / 86400.0
+      end
+    end
+
     def full_name
       events.first.full_method_name
     end
