@@ -15,6 +15,10 @@ class CodeEvent
     class_name + "#" + method_name
   end
 
+  def to_s
+    date.to_s + " " + class_name + "#" + method_name + ": " + complexity.to_s
+  end
+
 private
   def define_attribute(attr)
     singleton_class.send(:public)
