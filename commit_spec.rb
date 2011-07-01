@@ -14,7 +14,7 @@ describe "RepoDepot::Commit" do
       RepoDepot::Commit.new('', events).added_methods.count.should eq(1)
     end
 
-    it "has no method when the commit has an event with a previous state" do
+    it "has no methods when the commit has an event with a previous state" do
       (events ||= []) << CodeEvent.new(previous_state: CodeEvent.new({}))
       RepoDepot::Commit.new('', events).added_methods.count.should eq(0)
     end
