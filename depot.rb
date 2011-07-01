@@ -1,17 +1,13 @@
 
 module RepoDepot
-  class Depot < Repository
+  class Depot
 
-    def initialize name
-      super(name, load(name))
-    end
-
-    private
-
-    def load name
-      new_events = read_events(name).sort_by(&:date)
-      weave(new_events)
-      new_events
+    def self.load name
+      events = read_events(name).sort_by(&:date)
+      events = events.select {|e| e.class_name =~ /^[A-Z]/ }
+      events = events.reject {|e| e.method_name == "none" }
+      weave(events)
+      Repository.new(name, events)
     end
 
   end
